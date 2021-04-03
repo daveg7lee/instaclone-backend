@@ -1,0 +1,42 @@
+{
+  "name": "instaclone-backend",
+  "version": "1.0.0",
+  "description": "Instaclone Backend build with Prisma and GraphQL",
+  "main": "index.js",
+  "repository": "https://github.com/daveg7lee/instaclone-backend",
+  "author": "dave <daveg7lee@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "preinstall": "npx npm-force-resolutions",
+    "dev": "nodemon --delay 0.5 --exec ts-node src/server --ext ts,js",
+    "migrate": "npx prisma migrate dev --preview-feature",
+    "studio": "npx prisma studio"
+  },
+  "dependencies": {
+    "@prisma/client": "^2.19.0",
+    "apollo-server": "^2.21.0",
+    "apollo-server-express": "^2.21.0",
+    "aws-sdk": "^2.868.0",
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "graphql-tools": "^7.0.3",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "nodemon": "^2.0.7",
+    "prettier-plugin-prisma": "^0.6.0",
+    "prisma": "^2.19.0"
+  },
+  "resolutions": {
+    "fs-capacitor": "^6.2.0",
+    "graphql-upload": "^11.0.0"
+  }
+}
