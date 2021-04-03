@@ -1,14 +1,15 @@
-import { Resolvers } from "../../types";
-import { checkUsername, protectedResolver } from "../user.utils";
+import client from '../../client';
+import { Resolvers } from '../../types';
+import { checkUsername, protectedResolver } from '../user.utils';
 
 const resolvers: Resolvers = {
   Mutation: {
     unfollowUser: protectedResolver(
-      async (_, { username }, { loggedInUser, client }) => {
+      async (_, { username }, { loggedInUser }) => {
         try {
           const ok = await checkUsername(username);
           if (!ok) {
-            throw new Error("User not found Check username is correct");
+            throw new Error('User not found Check username is correct');
           }
           await client.user.update({
             where: { id: loggedInUser.id },

@@ -1,13 +1,13 @@
-import bcrypt from "bcrypt";
-import { Resolvers } from "../../types";
-import { checkEmail, checkUsername } from "../user.utils";
+import bcrypt from 'bcrypt';
+import client from '../../client';
+import { Resolvers } from '../../types';
+import { checkEmail, checkUsername } from '../user.utils';
 
 const resolvers: Resolvers = {
   Mutation: {
     createAccount: async (
       _,
-      { firstName, lastName, username, email, password },
-      { client }
+      { firstName, lastName, username, email, password }
     ) => {
       try {
         // Check Username or Email is already taken
@@ -16,10 +16,10 @@ const resolvers: Resolvers = {
         if (existingEmail || existingUsername) {
           throw new Error(
             existingEmail && existingUsername
-              ? "Username and Email is already taken"
+              ? 'Username and Email is already taken'
               : existingUsername
-              ? "Username is already taken"
-              : "Email is already taken"
+              ? 'Username is already taken'
+              : 'Email is already taken'
           );
         }
         // hashing password for security

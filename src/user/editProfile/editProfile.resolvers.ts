@@ -1,8 +1,8 @@
-import { createWriteStream } from 'fs';
 import bcrypt from 'bcrypt';
 import { protectedResolver, checkEmail, checkUsername } from '../user.utils';
 import { Resolvers } from '../../types';
 import { deleteInS3, uploadToS3 } from '../../shared/shared.utils';
+import client from '../../client';
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -18,7 +18,7 @@ const resolvers: Resolvers = {
           bio,
           avatar,
         },
-        { loggedInUser, client }
+        { loggedInUser }
       ) => {
         try {
           let avatarUrl = null;
