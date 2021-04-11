@@ -23,8 +23,9 @@ const apollo = new ApolloServer({
         loggedInUser: await getUser(req.headers.token),
       };
     } else {
+      const { context } = connection;
       return {
-        loggedInUser: connection.context.loggedInUser,
+        loggedInUser: context.loggedInUser,
       };
     }
   },
