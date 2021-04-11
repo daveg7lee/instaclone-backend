@@ -17,13 +17,15 @@ const apollo = new ApolloServer({
   resolvers,
   typeDefs,
   introspection: true,
-  context: async ({ req, connection }) => {
-    if (req) {
+  context: async (ctx) => {
+    if (ctx.req) {
       return {
-        loggedInUser: await getUser(req.headers.token),
+        loggedInUser: await getUser(ctx.req.headers.token),
       };
     } else {
-      const { context } = connection;
+      const {
+        connection: { context },
+      } = ctx;
       return {
         loggedInUser: context.loggedInUser,
       };
