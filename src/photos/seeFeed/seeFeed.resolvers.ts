@@ -3,8 +3,8 @@ import { protectedResolver } from '../../user/user.utils';
 
 export default {
   Query: {
-    seeFeed: protectedResolver((_, { lastId }, { loggedInUser }) =>
-      client.photo.findMany({
+    seeFeed: protectedResolver((_, { lastId }, { loggedInUser }) => {
+      return client.photo.findMany({
         where: {
           OR: [
             {
@@ -31,7 +31,7 @@ export default {
             id: lastId,
           },
         }),
-      })
-    ),
+      });
+    }),
   },
 };
