@@ -6,7 +6,9 @@ export default {
     hashtags: ({ id }) =>
       client.hashtag.findMany({ where: { photos: { some: { id } } } }),
     likes: ({ id }) => client.like.count({ where: { photoId: id } }),
-    comments: ({ id }) => client.comment.count({ where: { photoId: id } }),
+    commentNumbers: ({ id }) =>
+      client.comment.count({ where: { photoId: id } }),
+    comments: ({ id }) => client.photo.findUnique({ where: { id } }).comments(),
     isMine: ({ userId }, _, { loggedInUser }) => {
       if (!loggedInUser) {
         return false;
