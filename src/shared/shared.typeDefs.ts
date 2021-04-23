@@ -5,5 +5,6 @@ export default gql`
     success: Boolean!
     error: String
     token: String
+    id: Int
   }
 `;
