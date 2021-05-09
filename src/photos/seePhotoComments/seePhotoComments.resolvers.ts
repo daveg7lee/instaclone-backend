@@ -2,16 +2,11 @@ import client from '../../client';
 
 export default {
   Query: {
-    seePhotoComments: (_, { id, lastId }) =>
+    seePhotoComments: (_, { id, offset }) =>
       client.comment.findMany({
         where: { photo: { id } },
         take: 10,
-        skip: lastId && 1,
-        ...(lastId && {
-          cursor: {
-            id: lastId,
-          },
-        }),
+        skip: offset,
         orderBy: {
           createdAt: 'desc',
         },

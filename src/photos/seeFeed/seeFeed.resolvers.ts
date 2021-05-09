@@ -24,7 +24,7 @@ export default {
         orderBy: {
           createdAt: 'desc',
         },
-        take: 4,
+        take: 2,
         skip: offset,
       });
     }),

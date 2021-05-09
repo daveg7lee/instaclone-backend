@@ -1,19 +1,14 @@
-import client from "../../client";
+import client from '../../client';
 
 export default {
   Query: {
-    searchPhotos: (_, { keyword, lastId }) =>
+    searchPhotos: (_, { keyword, offset }) =>
       client.photo.findMany({
-        where: { caption: { startsWith: keyword } },
+        where: { caption: { contains: keyword } },
         take: 10,
-        skip: lastId && 1,
-        ...(lastId && {
-          cursor: {
-            id: lastId,
-          },
-        }),
+        skip: offset,
         orderBy: {
-          createdAt: "asc",
+          createdAt: 'asc',
         },
       }),
   },
