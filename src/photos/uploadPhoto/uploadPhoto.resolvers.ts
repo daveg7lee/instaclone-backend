@@ -1,3 +1,4 @@
+import client from '../../client';
 import { uploadToS3 } from '../../shared/shared.utils';
 import { protectedResolver } from '../../user/user.utils';
 import { extractHashtags } from '../photos.utils';
@@ -5,7 +6,7 @@ import { extractHashtags } from '../photos.utils';
 export default {
   Mutation: {
     uploadPhoto: protectedResolver(
-      async (_, { file, caption }, { loggedInUser, client }) => {
+      async (_, { file, caption }, { loggedInUser }) => {
         let hashtagObj = [];
         if (caption) {
           hashtagObj = extractHashtags(caption);
