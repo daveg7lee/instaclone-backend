@@ -8,7 +8,22 @@ export default {
     sendMessage: protectedResolver(
       async (_, { payload, roomId, userId }, { loggedInUser }) => {
         let room = null;
-        if (userId) {
+        if (roomId) {
+          room = await client.room.findUnique({
+            where: {
+              id: roomId,
+            },
+            select: {
+              id: true,
+            },
+          });
+          if (!room) {
+            return {
+              success: false,
+              error: 'Room not found',
+            };
+          }
+        } else if (userId) {
           const user = await client.user.findUnique({
             where: {
               id: userId,
@@ -37,21 +52,6 @@ export default {
               },
             },
           });
-        } else if (roomId) {
-          room = await client.room.findUnique({
-            where: {
-              id: roomId,
-            },
-            select: {
-              id: true,
-            },
-          });
-          if (!room) {
-            return {
-              success: false,
-              error: 'Room not found',
-            };
-          }
         }
         const message = await client.message.create({
           data: {
@@ -71,6 +71,7 @@ export default {
         pubsub.publish(NEW_MESSAGE, { roomUpdates: { ...message } });
         return {
           success: true,
+          id: message.id,
         };
       }
     ),

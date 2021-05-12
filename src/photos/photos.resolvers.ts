@@ -8,7 +8,12 @@ export default {
     likes: ({ id }) => client.like.count({ where: { photoId: id } }),
     commentNumbers: ({ id }) =>
       client.comment.count({ where: { photoId: id } }),
-    comments: ({ id }) => client.photo.findUnique({ where: { id } }).comments(),
+    comments: ({ id }, { offset }) =>
+      client.comment.findMany({
+        where: { photoId: id },
+        skip: offset,
+        take: 10,
+      }),
     isMine: ({ userId }, _, { loggedInUser }) => {
       if (!loggedInUser) {
         return false;
