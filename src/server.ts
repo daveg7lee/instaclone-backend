@@ -2,7 +2,7 @@ require('dotenv').config();
 import http from 'http';
 import express from 'express';
 import logger from 'morgan';
-import { ApolloServer, Request } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
 import { typeDefs, resolvers } from './schema';
 import { getUser } from './user/user.utils';
 

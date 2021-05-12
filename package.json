@@ -11,10 +11,9 @@
     "dev": "nodemon --delay 0.5 --exec ts-node src/server --ext ts,js",
     "migrate": "npx prisma migrate dev --preview-feature",
     "studio": "npx prisma studio",
-    "prebuild": "rm -rf dist",
+    "prebuild": "rm -rf built",
     "build": "tsc",
-    "postbuild": "cd src && copy ./api/**/*.graphql ../dist/api",
-    "start": "cd dist && node ."
+    "start": "node built/server"
   },
   "dependencies": {
     "@prisma/client": "^2.21.2",
