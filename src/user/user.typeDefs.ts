@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server';
 
 export default gql`
   type User {
@@ -16,6 +16,7 @@ export default gql`
     followers: [User]
     totalFollowing: Int!
     totalFollowers: Int!
+    totalPosts: Int!
     isFollowing: Boolean!
     isMe: Boolean!
   }

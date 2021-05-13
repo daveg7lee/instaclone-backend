@@ -1,4 +1,4 @@
-import client from "../client";
+import client from '../client';
 
 export default {
   User: {
@@ -6,6 +6,7 @@ export default {
       client.user.count({ where: { following: { some: { id } } } }),
     totalFollowing: ({ id }) =>
       client.user.count({ where: { followers: { some: { id } } } }),
+    totalPosts: ({ id }) => client.photo.count({ where: { userId: id } }),
     isMe: async ({ id }, _, { loggedInUser }) => {
       if (!loggedInUser) {
         return false;
